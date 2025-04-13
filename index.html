@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#4361ee">
+    <title>AdPortal | Premium Ad Networks</title>
+    <meta name="description" content="One-click access to top advertising platforms. Maximize your revenue with premium ad networks.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --text: #2b2d42;
+            --text-light: #6c757d;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --toggle-bg: #e9ecef;
+            --success: #4cc9f0;
+            --border-radius: 12px;
+        }
+
+        .dark-mode {
+            --primary: #4895ef;
+            --primary-light: #4cc9f0;
+            --secondary: #560bad;
+            --accent: #b5179e;
+            --text: #f8f9fa;
+            --text-light: #adb5bd;
+            --bg: #121212;
+            --card-bg: #1e1e1e;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            --toggle-bg: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 1rem;
+            flex: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            background-color: var(--bg);
+            z-index: 100;
+            transition: background-color 0.4s ease;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.4rem;
+        }
+
+        .theme-toggle {
+            background: var(--toggle-bg);
+            border: none;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-size: 1.2rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 6vw, 2.8rem);
+            margin-bottom: 1.2rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+            color: var(--text-light);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+            gap: 1.8rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-size: 1.05rem;
+            color: var(--text-light);
+            flex: 1;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 240px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before, .btn:focus::before {
+            opacity: 1;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover i {
+            transform: translateX(3px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            opacity: 0.8;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-top: auto;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-mode footer {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.75rem;
+            }
+            
+            header {
+                padding: 0.75rem 0;
+                position: static;
+            }
+            
+            .card {
+                padding: 1.75rem;
+            }
+            
+            .btn {
+                padding: 0.9rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .grid {
+                gap: 1.5rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .card-icon {
+                font-size: 2.2rem;
+            }
+            
+            .card h3 {
+                font-size: 1.35rem;
+            }
+            
+            .btn {
+                max-width: 100%;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            
+            .card:hover {
+                transform: none;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        button:focus, a:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+        }
+
+        /* PWA install prompt */
+        .install-prompt {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card-bg);
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+            max-width: 90%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .install-prompt.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .install-prompt button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="#" class="logo">
+                <i class="fas fa-ad"></i>
+                <span>AdPortal</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <section class="hero">
+            <h1>Premium Ad Networks</h1>
+            <p>Maximize your revenue with one-click access to the world's top advertising platforms</p>
+        </section>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>ADVARTICA</h3>
+                <p>High-performance advertising platform with premium demand sources and smart optimization tools for maximum revenue.</p>
+                <button class="btn" onclick="openLink('https://015467.shop/7d7c31d70cb24a47640e/67f25ea302/?placementName=AdPortal')">
+                    <span>Visit Now</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>MONETAG</h3>
+                <p>Advanced monetization solution that helps publishers increase revenue through optimized ad placements and real-time analytics.</p>
+                <button class="btn" onclick="openLink('https://whoockeg.top/4/9209564')">
+                    <span>Visit Now</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>ADSTERRA</h3>
+                <p>Global advertising network offering high-quality traffic and innovative ad formats for publishers worldwide.</p>
+                <button class="btn" onclick="openLink('https://www.profitableratecpm.com/ky39zqau?key=4d818c13e6ac1247354fe8bfc6845c8e')">
+                    <span>Visit Now</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <footer>
+            <p>© <span id="currentYear"></span> AdPortal. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms</a></p>
+        </footer>
+    </div>
+
+    <div class="install-prompt" id="installPrompt">
+        <span>Install AdPortal for quick access?</span>
+        <button id="installButton">Install</button>
+        <button id="dismissInstall" style="background: transparent; color: var(--text);">Dismiss</button>
+    </div>
+
+    <script>
+        // DOM Ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Initialize theme
+            initTheme();
+            
+            // Setup service worker
+            registerServiceWorker();
+            
+            // Setup install prompt
+            setupInstallPrompt();
+            
+            // Add touch feedback to buttons
+            setupTouchFeedback();
+        });
+
+        // Theme Management
+        function initTheme() {
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            const icon = themeToggle.querySelector('i');
+            
+            // Check for saved preference or system preference
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                enableDarkMode();
+            }
+            
+            themeToggle.addEventListener('click', toggleTheme);
+            
+            // Watch for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (!localStorage.getItem('theme')) {
+                    e.matches ? enableDarkMode() : disableDarkMode();
+                }
+            });
+        }
+        
+        function toggleTheme() {
+            document.body.classList.contains('dark-mode') ? disableDarkMode() : enableDarkMode();
+        }
+        
+        function enableDarkMode() {
+            document.body.classList.add('dark-mode');
+            document.getElementById('themeToggle').querySelector('i').classList.replace('fa-moon', 'fa-sun');
+            localStorage.setItem('theme', 'dark');
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', '#121212');
+        }
+        
+        function disableDarkMode() {
+            document.body.classList.remove('dark-mode');
+            document.getElementById('themeToggle').querySelector('i').classList.replace('fa-sun', 'fa-moon');
+            localStorage.setItem('theme', 'light');
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', '#4361ee');
+        }
+
+        // Link handling with loading state
+        function openLink(url) {
+            const btn = event.currentTarget;
+            const originalContent = btn.innerHTML;
+            
+            // Show loading state
+            btn.innerHTML = '<div class="loading-spinner"></div><span>Loading...</span>';
+            btn.disabled = true;
+            
+            // Open link after short delay
+            setTimeout(() => {
+                window.open(url, '_blank', 'noopener,noreferrer');
+                
+                // Restore button after delay
+                setTimeout(() => {
+                    btn.innerHTML = originalContent;
+                    btn.disabled = false;
+                }, 1000);
+            }, 300);
+        }
+
+        // Service Worker Registration
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js')
+                        .then(registration => {
+                            console.log('ServiceWorker registration successful');
+                        })
+                        .catch(err => {
+                            console.log('ServiceWorker registration failed: ', err);
+                        });
+                });
+            }
+        }
+
+        // PWA Install Prompt
+        function setupInstallPrompt() {
+            let deferredPrompt;
+            const installPrompt = document.getElementById('installPrompt');
+            const installButton = document.getElementById('installButton');
+            const dismissButton = document.getElementById('dismissInstall');
+            
+            if (!installPrompt) return;
+            
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                
+                // Show prompt after delay
+                setTimeout(() => {
+                    installPrompt.classList.add('show');
+                }, 5000);
+            });
+            
+            installButton.addEventListener('click', () => {
+                installPrompt.classList.remove('show');
+                deferredPrompt.prompt();
+                
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted install');
+                    } else {
+                        console.log('User dismissed install');
+                    }
+                    deferredPrompt = null;
+                });
+            });
+            
+            dismissButton.addEventListener('click', () => {
+                installPrompt.classList.remove('show');
+            });
+        }
+
+        // Touch feedback for buttons
+        function setupTouchFeedback() {
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('touchstart', () => {
+                    button.style.transform = 'scale(0.96)';
+                }, { passive: true });
+                
+                button.addEventListener('touchend', () => {
+                    button.style.transform = '';
+                }, { passive: true });
+            });
+        }
+    </script>
+</body>
+</html>
